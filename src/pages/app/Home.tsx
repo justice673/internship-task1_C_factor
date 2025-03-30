@@ -156,9 +156,11 @@ const Home: React.FC = () => {
 
                         {/* Right Icons (Cart & Account/Login) */}
                         <div className="flex items-center space-x-4">
-                            <button className="p-2 rounded-full hover:bg-purple-500">
-                                <ShoppingCart className="h-5 w-5" />
-                            </button>
+                            <Link to="/cart">
+                                <button className="p-2 rounded-full hover:bg-purple-500">
+                                    <ShoppingCart className="h-5 w-5" />
+                                </button>
+                            </Link>
                             {user ? (
                                 <Link
                                     to="/dashboard"
@@ -181,30 +183,22 @@ const Home: React.FC = () => {
 
                 {/* Sliding Mobile Menu */}
                 <div
-                    className={`fixed top-0 left-0 h-full w-64 bg-purple-700 p-6 transform ${menuOpen ? "translate-x-0" : "-translate-x-full"
-                        } transition-transform duration-300 ease-in-out md:hidden shadow-lg`}
+                    className={`fixed top-16 left-0 h-full w-64 bg-purple-700 p-6 transform ${menuOpen ? "translate-x-0" : "-translate-x-full"
+                        } transition-transform duration-300 ease-in-out md:hidden shadow-lg z-40`}
                 >
-                    {/* Close Button */}
-                    <button
-                        className="absolute top-4 right-4 text-white"
-                        onClick={() => setMenuOpen(false)}
-                    >
-                        <X className="h-6 w-6" />
-                    </button>
-
                     {/* Mobile Links */}
                     <div className="mt-8 flex flex-col space-y-6">
                         <Link
                             to="/"
-                            className="text-white text-lg font-medium hover:text-purple-300 transition"
-                            onClick={() => setMenuOpen(false)} // Closes menu on click
+                            className="text-white text-lg font-medium p-2 hover:bg-white/20 transition-all duration-200"
+                            onClick={() => setMenuOpen(false)}
                         >
                             Home
                         </Link>
                         <Link
                             to="/shop"
-                            className="text-white text-lg font-medium hover:text-purple-300 transition"
-                            onClick={() => setMenuOpen(false)} // Closes menu on click
+                            className="text-white text-lg font-medium p-2 hover:bg-white/20 transition-all duration-200"
+                            onClick={() => setMenuOpen(false)}
                         >
                             Shop
                         </Link>
@@ -214,10 +208,11 @@ const Home: React.FC = () => {
                 {/* Overlay when menu is open */}
                 {menuOpen && (
                     <div
-                        className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
+                        className="fixed inset-0 bg-black/50 md:hidden z-30"
                         onClick={() => setMenuOpen(false)}
                     ></div>
                 )}
+
             </nav>
 
 

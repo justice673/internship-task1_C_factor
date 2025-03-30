@@ -203,10 +203,6 @@ export default function Login() {
                 </button>
               </div>
             </div>
-
-            {/* <div className="text-center text-sm text-gray-600">
-              <p>Demo credentials: <span className="font-semibold">kminchelle / 0lelplR</span></p>
-            </div> */}
           </div>
         </div>
       </div>

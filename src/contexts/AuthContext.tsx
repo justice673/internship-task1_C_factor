@@ -91,7 +91,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isLoading: false
       });
   
-      // Force navigation to login page
+      // Force navigation to home page
       window.location.href = '/'; // This will force a full page reload
     } catch (error) {
       console.error('Logout failed:', error);
