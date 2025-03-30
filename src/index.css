@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* To apply to the whole app */
+body {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* OR for specific elements */
+.your-class {
+  font-family: 'Outfit', sans-serif;
+}
