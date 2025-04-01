@@ -13,22 +13,9 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import Sidebar from '../../../layouts/Sidebar';
-import { Comment } from '../../../types';
+import { Comment, CommentCardProps, CommentModalProps } from '../../../types';
 import { api } from '../../../services/api';
 
-interface CommentCardProps {
-  comment: Comment;
-  onEdit: (comment: Comment) => void;
-  onDelete: (id: number) => void;
-}
-
-interface CommentModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (comment: Omit<Comment, 'id'> | Comment) => void;
-  initialData?: Comment;
-  mode: 'add' | 'edit';
-}
 
 // Alert Modal Component
 const AlertModal: React.FC<{

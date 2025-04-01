@@ -31,6 +31,8 @@ export interface User {
     };
   }
   
+  // this is the type for comments
+
   export interface Comment {
     id: number;
     body: string;
@@ -40,6 +42,20 @@ export interface User {
       username: string;
     };
     isLocal?: boolean;
+  }
+
+  export interface CommentCardProps {
+    comment: Comment;
+    onEdit: (comment: Comment) => void;
+    onDelete: (id: number) => void;
+  }
+  
+  export interface CommentModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (comment: Omit<Comment, 'id'> | Comment) => void;
+    initialData?: Comment;
+    mode: 'add' | 'edit';
   }
   
   
