@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { Post, Comment as CommentType, Product } from '../types/index';
 
-// Re-export the Comment type so it can be imported from this file
 export type Comment = CommentType;
 const BASE_URL = 'https://dummyjson.com';
 
@@ -28,12 +27,10 @@ interface ProductResponse {
   limit: number;
 }
 
-// New interface for product comments with productId
 interface ProductComment extends CommentType {
   productId: number;
 }
 
-// Define our own simplified AxiosError interface
 interface AxiosErrorResponse {
   response?: {
     data?: {

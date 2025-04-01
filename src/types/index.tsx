@@ -31,7 +31,26 @@ export interface User {
     };
   }
   
-  // Existing types
+  export interface Comment {
+    id: number;
+    body: string;
+    postId: number;
+    user: {
+      id: number;
+      username: string;
+    };
+  }
+  
+  
+  export interface DashboardStats {
+    totalPosts: number;
+    totalProducts: number;
+    totalComments: number;
+    totalRevenue: number;
+  }
+  
+  //this is the type for the posts
+
   export interface Post {
     id: number;
     title: string;
@@ -43,17 +62,33 @@ export interface User {
       dislikes: number;
     };
   }
-  
-  export interface Comment {
-    id: number;
-    body: string;
-    postId: number;
-    user: {
-      id: number;
-      username: string;
-    };
+
+  export interface PostModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (post: Omit<Post, 'id'> | Post) => void;
+    initialData?: Post;
+    mode: 'add' | 'edit';
   }
   
+  export interface AlertModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    title: string;
+    message: string;
+  }
+  
+  export interface PostCardProps {
+    post: Post;
+    onEdit: (post: Post) => void;
+    onDelete: (id: number) => void;
+  }
+  
+
+  //this is the type for the products
+
+   
   export interface Product {
     id: number;
     title: string;
@@ -67,10 +102,25 @@ export interface User {
     thumbnail: string;
     images: string[];
   }
-  
-  export interface DashboardStats {
-    totalPosts: number;
-    totalProducts: number;
-    totalComments: number;
-    totalRevenue: number;
-  }
+
+  interface ProductModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (product: Omit<Product, 'id'> | Product) => void;
+    initialData?: Product;
+    mode: 'add' | 'edit';
+}
+
+interface AlertModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    title: string;
+    message: string;
+}
+
+interface ProductCardProps {
+    product: Product;
+    onEdit: (product: Product) => void;
+    onDelete: (id: number) => void;
+}
