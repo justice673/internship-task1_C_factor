@@ -15,15 +15,15 @@ import {
     AlertTriangle
 } from 'lucide-react';
 import Sidebar from '../../../layouts/Sidebar';
-import { Product } from '../../../types/index';
+import { Product, AlertModalProps, ProductCardProps, ProductModalProps } from '../../../types/index';
 import { productService } from '../../../services/api';
 
-// interface ProductResponse {
-//     products: Product[];
-//     total: number;
-//     skip: number;
-//     limit: number;
-// }
+interface ProductResponse {
+    products: Product[];
+    total: number;
+    skip: number;
+    limit: number;
+}
 
 // Alert Modal Component
 const AlertModal: React.FC<AlertModalProps> = ({ isOpen, onClose, onConfirm, title, message }) => {
@@ -96,6 +96,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
             category,
             brand,
             thumbnail,
+            discountPercentage: initialData?.discountPercentage || 0,
+            rating: initialData?.rating || 0,
+            stock: initialData?.stock || 0,
+            images: initialData?.images || [],
             ...(initialData && { id: initialData.id }),
             isLocal: true
         };
@@ -387,8 +391,8 @@ const ProductList: React.FC = () => {
         setIsModalOpen(true);
     };
 
-    const handleUpdateProduct = (updatedProduct: Product) => {
-        if (updatedProduct.isLocal) {
+    const handleUpdateProduct = (updatedProduct: Product | Omit<Product, 'id'>) => {
+        if ('id' in updatedProduct && updatedProduct.isLocal) {
             setLocalProducts(prevProducts =>
                 prevProducts.map(product =>
                     product.id === updatedProduct.id ? updatedProduct : product
@@ -480,7 +484,7 @@ const ProductList: React.FC = () => {
                             setEditingProduct(null);
                         }}
                         onSubmit={modalMode === 'add' ? handleAddProduct : handleUpdateProduct}
-                        initialData={editingProduct}
+                        initialData={editingProduct || undefined}
                         mode={modalMode}
                     />
 

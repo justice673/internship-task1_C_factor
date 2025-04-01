@@ -40,8 +40,8 @@ interface AxiosErrorResponse {
 }
 
 export const api = {
-  async getPosts(limit: number = 10) {
-    const response = await axios.get<PostResponse>(`${BASE_URL}/posts?limit=${limit}`);
+  async getPosts(limit: number = 10, page: number = 1) {
+    const response = await axios.get<PostResponse>(`${BASE_URL}/posts?limit=${limit}&page=${page}`);
     return response.data;
   },
 
@@ -52,6 +52,13 @@ export const api = {
   async deleteComment(id: number) {
     const response = await axios.delete(`${BASE_URL}/comments/${id}`);
     return response.data;
+  },
+  async deletePost(id: number): Promise<void> {
+      return fetch(`/posts/${id}`, { method: 'DELETE' }).then((response) => {
+          if (!response.ok) {
+              throw new Error('Failed to delete post');
+          }
+      });
   }
 };
 

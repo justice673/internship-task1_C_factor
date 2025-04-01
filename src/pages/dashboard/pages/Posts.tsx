@@ -13,7 +13,7 @@ import {
     AlertTriangle
 } from 'lucide-react';
 import Sidebar from '../../../layouts/Sidebar';
-import { Post } from '../../../types/index';
+import { Post, AlertModalProps, PostCardProps, PostModalProps } from '../../../types/index';
 import { api } from '../../../services/api';
 
 // Alert Modal Component
@@ -296,19 +296,23 @@ const PostsList: React.FC = () => {
         setIsModalOpen(true);
     };
 
-    const handleUpdatePost = (updatedPost: Post) => {
-        if (updatedPost.isLocal) {
-            setLocalPosts(prevPosts =>
-                prevPosts.map(post =>
-                    post.id === updatedPost.id ? updatedPost : post
-                )
-            );
+    const handleUpdatePost = (updatedPost: Post | Omit<Post, 'id'>) => {
+        if ('id' in updatedPost) {
+            if (updatedPost.isLocal) {
+                setLocalPosts(prevPosts =>
+                    prevPosts.map(post =>
+                        post.id === updatedPost.id ? updatedPost : post
+                    )
+                );
+            } else {
+                setApiPosts(prevPosts =>
+                    prevPosts.map(post =>
+                        post.id === updatedPost.id ? updatedPost : post
+                    )
+                );
+            }
         } else {
-            setApiPosts(prevPosts =>
-                prevPosts.map(post =>
-                    post.id === updatedPost.id ? updatedPost : post
-                )
-            );
+            console.error('Cannot update a post without an ID.');
         }
     };
 
@@ -424,7 +428,7 @@ const PostsList: React.FC = () => {
                             setEditingPost(null);
                         }}
                         onSubmit={modalMode === 'add' ? handleAddPost : handleUpdatePost}
-                        initialData={editingPost}
+                        initialData={editingPost || undefined}
                         mode={modalMode}
                     />
 

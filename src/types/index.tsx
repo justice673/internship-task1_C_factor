@@ -39,6 +39,7 @@ export interface User {
       id: number;
       username: string;
     };
+    isLocal?: boolean;
   }
   
   
@@ -61,6 +62,7 @@ export interface User {
       likes: number;
       dislikes: number;
     };
+    isLocal?: boolean;
   }
 
   export interface PostModalProps {
@@ -101,9 +103,10 @@ export interface User {
     category: string;
     thumbnail: string;
     images: string[];
+    isLocal?: boolean;
   }
 
-  interface ProductModalProps {
+  export interface ProductModalProps {
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (product: Omit<Product, 'id'> | Product) => void;
@@ -111,15 +114,7 @@ export interface User {
     mode: 'add' | 'edit';
 }
 
-interface AlertModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-    title: string;
-    message: string;
-}
-
-interface ProductCardProps {
+  export interface ProductCardProps {
     product: Product;
     onEdit: (product: Product) => void;
     onDelete: (id: number) => void;

@@ -276,21 +276,23 @@ const CommentsList: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleUpdateComment = (updatedComment: Comment) => {
-    if (updatedComment.isLocal) {
-      setLocalComments(prevComments =>
-        prevComments.map(comment =>
-          comment.id === updatedComment.id ? updatedComment : comment
-        )
-      );
-    } else {
-      setApiComments(prevComments =>
-        prevComments.map(comment =>
-          comment.id === updatedComment.id ? updatedComment : comment
-        )
-      );
-    }
-  };
+  const handleUpdateComment = (updatedComment: Comment | Omit<Comment, 'id'>) => {
+      if ('id' in updatedComment) {
+        if (updatedComment.isLocal) {
+          setLocalComments(prevComments =>
+            prevComments.map(comment =>
+              comment.id === updatedComment.id ? updatedComment : comment
+            )
+          );
+        } else {
+          setApiComments(prevComments =>
+            prevComments.map(comment =>
+              comment.id === updatedComment.id ? updatedComment : comment
+            )
+          );
+        }
+      }
+    };
 
   const handleDeleteClick = (id: number) => {
     setCommentToDelete(id);
@@ -405,7 +407,7 @@ const CommentsList: React.FC = () => {
               setEditingComment(null);
             }}
             onSubmit={modalMode === 'add' ? handleAddComment : handleUpdateComment}
-            initialData={editingComment}
+            initialData={editingComment || undefined}
             mode={modalMode}
           />
 
