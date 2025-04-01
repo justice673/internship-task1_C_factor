@@ -31,7 +31,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { isLoaded: isClerkLoaded, signIn: clerkSignIn } = useSignIn();
   const { login, isLoading } = useAuth();
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -48,7 +48,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.username || !formData.password) {
       toast.error("Please fill in all fields");
       return;
@@ -59,7 +59,7 @@ export default function Login() {
         username: formData.username,
         password: formData.password,
       });
-      
+
       toast.success("Login successful!");
       navigate("/dashboard");
     } catch (error: any) {
@@ -171,7 +171,7 @@ export default function Login() {
             <div className="space-y-3">
               <div className="text-center">
                 <p className="text-gray-600 text-sm">Or login with</p>
-                <button 
+                <button
                   onClick={handleGoogleSignIn}
                   disabled={isLoading}
                   className="mt-2 p-2 bg-transparent border-none transition-colors hover:text-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -201,6 +201,15 @@ export default function Login() {
                     ></path>
                   </svg>
                 </button>
+                <div className="text-gray-600 ">
+                  use this default login credentials
+                </div>
+                <div className="text-gray-600 ">
+                  username: <span className="text-purple-500"> emilys </span> 
+                </div>
+                <div className="text-gray-600 ">
+                  password: <span className="text-purple-500"> emilyspass </span>
+                </div>
               </div>
             </div>
           </div>
